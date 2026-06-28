@@ -1,5 +1,7 @@
 ## Moby Dick
 
+**[View the Exhibit](https://jaredchall.github.io/literature-moby-dick/)**
+
 An exhibit of selected quotes from Herman Melville's Moby Dick accompanied by illustrations of scenes from the novel.
 
 ### Usage
