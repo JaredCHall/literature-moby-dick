@@ -1,0 +1,240 @@
+:root {
+    --font-body:    'Cormorant Garamond';
+    --font-display: 'Cormorant SC';
+    --font-ui:      'IM Fell English';
+
+    /* Font sizes */
+    --size-title:        4.2rem;
+    --size-subtitle:     1.58rem;
+    --size-chapter-label: 1.5rem;
+    --size-blockquote:   1.5rem;
+
+    /* Font sizes — mobile */
+    --size-title-mobile:         2.8rem;
+    --size-subtitle-mobile:      1.2rem;
+    --size-chapter-label-mobile: 0.95rem;
+    --size-blockquote-mobile:    1.25rem;
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+body {
+    min-height: 100vh;
+    background: #0b1a2e;
+    font-family: var(--font-body), Georgia, serif;
+    color: #e8dfc8;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ============================================================
+   SCENE / BACKGROUND LAYERS
+   ============================================================ */
+
+.scene-layer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 2.5s ease-in-out;
+}
+
+.scene-layer.hidden {
+    opacity: 0;
+}
+
+.scene-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    background: rgba(6, 14, 26, 0.55);
+}
+
+/* ============================================================
+   CONTENT LAYOUT
+   ============================================================ */
+
+.content {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 100px 48px 140px;
+}
+
+/* ============================================================
+   MASTHEAD
+   ============================================================ */
+
+.masthead {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.masthead h1 {
+    font-family: var(--font-display), Georgia, serif;
+    font-size: var(--size-title);
+    font-variant: small-caps; /* fallback for fonts without a true SC variant */
+    letter-spacing: 0.06em;
+    color: #f5edd8;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.8);
+    margin-bottom: 10px;
+    line-height: 1.1;
+}
+
+.masthead .subtitle {
+    font-family: var(--font-ui), Georgia, serif;
+    font-style: italic;
+    font-size: var(--size-subtitle);
+    color: #a89e84;
+    letter-spacing: 0.04em;
+}
+
+.rule {
+    width: 140px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #8a7a5a, transparent);
+    margin: 24px auto;
+}
+
+/* ============================================================
+   PASSAGES
+   ============================================================ */
+
+.passage {
+    margin-bottom: 68px;
+    background: none;
+    border: 1px solid rgba(180, 160, 110, 0.18);
+    border-radius: 2px;
+    padding: 44px 52px;
+    backdrop-filter: blur(3px);
+    position: relative;
+}
+
+.passage::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    border-radius: 2px 0 0 2px;
+}
+
+.chapter-label {
+    font-family: var(--font-display), Georgia, serif;
+    font-size: var(--size-chapter-label);
+    font-variant: small-caps; /* fallback for fonts without a true SC variant */
+    font-weight: bold;
+    letter-spacing: 0.14em;
+    color: #8a7a5a;
+    margin-bottom: 22px;
+    text-transform: uppercase;
+}
+
+.passage blockquote {
+    font-family: var(--font-body), Georgia, serif;
+    font-size: var(--size-blockquote);
+    line-height: 1.85;
+    color: #ddd4bc;
+    /*font-style: italic;*/
+}
+
+.passage blockquote + blockquote {
+    margin-top: 22px;
+}
+
+.passage blockquote p {
+    margin-bottom: 16px;
+}
+
+.passage blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+.ornament {
+    text-align: center;
+    color: #8a7a5a;
+    font-size: 2.1rem;
+    margin: 12px 0 32px;
+    opacity: 0.7;
+}
+
+/* ============================================================
+   GALLERY TOGGLE BUTTON
+   ============================================================ */
+
+#gallery-toggle {
+    position: fixed;
+    bottom: 32px;
+    right: 36px;
+    z-index: 10;
+    background: rgba(8, 18, 35, 0.55);
+    border: 1px solid rgba(180, 160, 110, 0.28);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(4px);
+    color: #8a7a5a;
+    font-size: 1.2rem;
+    line-height: 1;
+    user-select: none;
+}
+
+body:hover #gallery-toggle {
+    opacity: 1;
+}
+
+#gallery-toggle:hover {
+    background: rgba(8, 18, 35, 0.8);
+    color: #e8dfc8;
+    border-color: rgba(180, 160, 110, 0.55);
+}
+
+/* ============================================================
+   GALLERY MODE
+   ============================================================ */
+
+.content, .scene-overlay {
+    transition: opacity 0.7s ease;
+}
+
+body.gallery-mode .content {
+    opacity: 0;
+    pointer-events: none;
+}
+
+body.gallery-mode .scene-overlay {
+    opacity: 0;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 640px) {
+    .content              { padding: 56px 24px 90px; }
+    .masthead h1          { font-size: var(--size-title-mobile); }
+    .masthead .subtitle   { font-size: var(--size-subtitle-mobile); }
+    .passage              { padding: 30px 28px; }
+    .passage blockquote   { font-size: var(--size-blockquote-mobile); }
+    .chapter-label        { font-size: var(--size-chapter-label-mobile); }
+}
