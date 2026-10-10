@@ -142,6 +142,7 @@ body {
    ============================================================ */
 
 .passage {
+    display: flow-root; /* keeps a leading divider's margin from collapsing into the gap above */
     margin-bottom: 84px;
 }
 
@@ -181,6 +182,16 @@ body {
 
 .chapter-label::after {
     background: linear-gradient(to left, transparent, var(--rule-strong));
+}
+
+/* Stands in for a label when a passage continues the previous chapter's
+   title: the two flanking lines joined, with no text between them. Margins
+   place the line where a label's lines would sit. */
+.divider {
+    border: none;
+    height: 2px;
+    margin: 14px 0 42px;
+    background: linear-gradient(to right, transparent, var(--rule-strong), transparent);
 }
 
 .passage blockquote {
@@ -334,5 +345,10 @@ html:has(body.gallery-mode) {
 
     .chapter-label::after {
         display: none;
+    }
+
+    .divider {
+        width: 140px;
+        margin: 0 auto 64px;
     }
 }
