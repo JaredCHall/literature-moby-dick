@@ -23,7 +23,7 @@ neither the MIT License nor the CC0 dedication above. Public-domain
 works are reproduced freely. Excerpts from works still under copyright
 appear in limited form, for commentary and artistic purposes, in
 reliance on fair use (17 U.S.C. § 107). Rights holders with concerns
-may contact [email]<storied.stoa@gmail.com>.
+may contact [email](mailto:storied.stoa@gmail.com).
 
 ### Sources
 
