@@ -26,38 +26,55 @@
    BASE
    ============================================================ */
 
+/* On <html>, not <body>: gallery mode sets overflow on <html>, which would
+   stop body's overflow propagating and turn <body> into a scroll container. */
+html {
+    overflow-x: hidden;
+}
+
 body {
     min-height: 100vh;
     background: #0b1a2e;
     font-family: var(--font-body), Georgia, serif;
     color: #e8dfc8;
     position: relative;
-    overflow-x: hidden;
 }
 
 /* ============================================================
    SCENE / BACKGROUND LAYERS
    ============================================================ */
 
+/*noinspection CssOverwrittenProperties*/
 .scene-layer {
     position: fixed;
     top: 0; left: 0;
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100vh;
+    height: 100lvh;
     z-index: 0;
     pointer-events: none;
-    background-size: cover;
-    background-position: center;
-    transition: opacity 2.5s ease-in-out;
+    transition: opacity 2.5s ease-in-out; /* the script reads this as the crossfade length */
+}
+
+.scene-layer img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .scene-layer.hidden {
     opacity: 0;
 }
 
+/*noinspection CssOverwrittenProperties*/
 .scene-overlay {
     position: fixed;
     top: 0; left: 0;
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100vh;
+    height: 100lvh;
     z-index: 1;
     pointer-events: none;
     background: rgba(6, 14, 26, 0.55);
@@ -173,6 +190,26 @@ body {
 }
 
 /* ============================================================
+   SCENE MARKERS (anchored scene starts)
+   ============================================================ */
+
+/* Land a jumped-to heading with its passage box in view, not flush to the top. */
+.scene-marker {
+    scroll-margin-top: 5rem;
+}
+
+.scene-marker a {
+    color: inherit;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.scene-marker a:hover,
+.scene-marker a:focus-visible {
+    color: #e8dfc8;
+}
+
+/* ============================================================
    GALLERY TOGGLE BUTTON
    ============================================================ */
 
@@ -209,6 +246,31 @@ body:hover #gallery-toggle {
     border-color: rgba(180, 160, 110, 0.55);
 }
 
+/* ---------- Gallery toggle on touch devices ---------- */
+
+/* Portrait, reading: hidden and untappable. */
+@media (hover: none) and (orientation: portrait) {
+    body:not(.gallery-mode) #gallery-toggle {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+/* Landscape: visible, dimmed. */
+@media (hover: none) and (orientation: landscape) {
+    #gallery-toggle,
+    body:hover #gallery-toggle {
+        opacity: 0.5;
+    }
+}
+
+/* Gallery mode, any orientation: always visible, so the reader can get back. */
+@media (hover: none) {
+    body.gallery-mode #gallery-toggle {
+        opacity: 0.5;
+    }
+}
+
 /* ============================================================
    GALLERY MODE
    ============================================================ */
@@ -224,6 +286,11 @@ body.gallery-mode .content {
 
 body.gallery-mode .scene-overlay {
     opacity: 0;
+}
+
+html:has(body.gallery-mode) {
+    overflow: hidden;
+    scrollbar-gutter: stable;
 }
 
 /* ============================================================
